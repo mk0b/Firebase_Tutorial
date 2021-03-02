@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel = "stylesheet"
+        type="text/css"
+        href = "styles.css" />
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
@@ -39,15 +42,16 @@
     
     <section id="whenSignedOut">
         
-        <button id="signInBtn">Sign in with Google</button>
-
+        <p>Welcome! Please sign in to witness the magic 🎆.</p>
+        <div style="text-align: center;"><button id="signInBtn">Sign in with Google</button></div>
+        
     </section>
 
     <section id="whenSignedIn" hidden="true">
 
         <div id="userDetails"></div>
 
-        <button id="signOutBtn">Sign Out</button>
+        <div style="text-align: center;"><button id="signOutBtn">Sign Out</button></div></section>
 
     </section>
 </body>

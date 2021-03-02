@@ -26,7 +26,7 @@ auth.onAuthStateChanged(user => {
         console.log('Logged In');
         whenSignedIn.hidden = false;
         whenSignedOut.hidden = true;
-        userDetails.innerHTML = `<h3>Hello ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
+        userDetails.innerHTML = `<h3>Hello, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
     } else {
         //not signed in
         console.log('Logged Out');
