@@ -7,9 +7,18 @@ const whenSignedOut = document.getElementById('whenSignedOut');
 const signInBtn = document.getElementById('signInBtn');
 const signOutBtn = document.getElementById('signOutBtn');
 const userDetails = document.getElementById('userDetails');
+const createThingBtn = document.getElementById('createThing');
+const thingsList = document.getElementById('thingsList');
+const thingsSection = document.getElementById('thingsSection');
 
 //set variable to firebase auth google provider instance
 const provider = new firebase.auth.GoogleAuthProvider();
+
+//refence to firebase firestore sdk
+const db = firebase.firestore();
+
+let thingsRef;
+let unsubscribe;
 
 //making event handlers for clicking sign in and sign out buttons.
 signInBtn.onclick = () => auth.signInWithPopup(provider);
@@ -27,11 +36,36 @@ auth.onAuthStateChanged(user => {
         whenSignedIn.hidden = false;
         whenSignedOut.hidden = true;
         userDetails.innerHTML = `<h3>Hello, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
+        thingsSection.hidden = false;
     } else {
         //not signed in
         console.log('Logged Out');
         whenSignedIn.hidden = true;
         whenSignedOut.hidden = false;
         userDetails.innerHTML = '';
+        thingsSection.hidden = true;
+    }
+});
+
+//listening to auth changes to the user being logged in for DB "permissions"
+auth.onAuthStateChanged(user => {
+    if (user) {
+        //connecting thingsRef to the things collection in our DB
+        thingsRef = db.collection('things');
+        console.log('thingsRef: ', thingsRef);
+        //click handler for when clicking the button
+        createThingBtn.onclick = () => {
+            console.log(this);
+            //getting servert time stamp the most accurate.
+            const { serverTimestamp } = firebase.firestore.FieldValue;
+
+            // add creates new records in the db and auto assigns a new id.
+            thingsRef.add({
+                //reference to a specific user
+                uid: user.uid,
+                name: 'Fake Name',
+                createdAt: serverTimestamp()
+            });
+        }
     }
 });
