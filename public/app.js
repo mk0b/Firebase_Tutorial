@@ -11,6 +11,8 @@ const createThingBtn = document.getElementById('createThing');
 const thingsList = document.getElementById('thingsList');
 const thingsSection = document.getElementById('thingsSection');
 
+console.log('Sign Out Button', signOutBtn);
+
 //set variable to firebase auth google provider instance
 const provider = new firebase.auth.GoogleAuthProvider();
 
