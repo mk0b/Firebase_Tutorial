@@ -86,5 +86,12 @@ auth.onAuthStateChanged(user => {
                 
                 thingsList.innerHTML = items.join('');
             }); 
+    } else {
+        //unsubscring from listening to all changes to the db
+        unsubscribe && unsubscribe();
+        console.log('Unsubscribed');
     }
 });
+
+//compound query you need to create a composite index and then you can chain queries.
+//come back to security rools part of the video
