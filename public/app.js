@@ -67,5 +67,22 @@ auth.onAuthStateChanged(user => {
                 createdAt: serverTimestamp()
             });
         }
+
+        console.log(thingsList);
+        //listening to real time changes query
+        //save as unsubscribe because queries will retur something that allows you to stop listneing
+        unsubscribe = thingsRef
+            .where('uid', '==', user.uid)
+            //don't really understand what happens below
+            .onSnapshot(querySnapshot => {
+                
+                const items = querySnapshot.docs.map(doc => {
+                    
+                    return `<li>${doc.data().name}</li>`;
+                });
+                console.log(items);
+                
+                thingsList.innerHTML = items.join('');
+            }); 
     }
 });
